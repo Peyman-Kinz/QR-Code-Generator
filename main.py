@@ -17,6 +17,10 @@ def generate_qr_code():
     else:
         messagebox.showerror("Fehler", "Bitte geben Sie Daten für den QR-Code ein.")
 
+def animate_button(button):
+    button.config(bg="darkblue", fg="white")
+    button.after(200, lambda: button.config(bg="black", fg="lightblue"))
+
 # GUI erstellen
 root = tk.Tk()
 root.title("QR-Code Generator")
@@ -40,10 +44,10 @@ qr_data_entry.pack(pady=5)
 # QR-Code generieren-Button
 generate_button = tk.Button(root, text="QR-Code generieren", font=font_style, bg="black", fg="lightblue", command=generate_qr_code)
 generate_button.pack(pady=10)
+generate_button.bind("<Enter>", lambda event, button=generate_button: animate_button(button))
 
 # QR-Code-Anzeige
 qr_label = tk.Label(root, font=font_style, fg="white", bg="lightblue")
 qr_label.pack()
 
 root.mainloop()
-
